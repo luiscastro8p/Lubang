@@ -53,7 +53,7 @@ export class MapComponent implements OnInit {
       map: this.mapRef,
       draggable: true,
       animation: google.maps.Animation.DROP,
-     // text: 'Ubicación Actual!'
+      text: 'Ubicación Actual!'
     });
     marker.addListener('dragend',function(event){
     var marcadorLatitud =this.getPosition().lat();
@@ -62,12 +62,10 @@ export class MapComponent implements OnInit {
       console.log(marcadorLongitud);
     });
   }
-  
+
   
   private async getLocation(){
     const rta= await this.geolocation.getCurrentPosition();
-    // console.log(rta.coords.latitude);
-    // console.log(rta.coords.longitude);
     return {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude

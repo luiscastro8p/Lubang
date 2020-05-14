@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title routerLink="/login" style="width: 170px;">
+      <ion-icon name="arrow-round-back"></ion-icon>Registro
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+
+  <img src="../../assets/slides/photos.svg" class="slide-image">
+  <form #form="ngForm" (ngSubmit)="register(form)" method="post">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input ngModel name="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input ngModel name="apellido"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input type="email" ngModel name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" ngModel name="password"></ion-input>
+    </ion-item>
+    <div style="display: flex;justify-content: center;align-content: center;margin-top: 52px;">
+      <ion-button type="submit" expand="full" color="danger">Registrarse</ion-button>
+    </div>
+  </form>
+</ion-content>

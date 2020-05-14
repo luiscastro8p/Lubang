@@ -1,0 +1,42 @@
+<ion-content>
+
+  <ion-grid class="center">
+    <ion-row>
+      <ion-col>
+        <img src="../../assets/itlm.jpg" class="slide-image margin-top">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Lubang</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form #form="ngForm" (ngSubmit)="login(form)" method="post" style="margin: 35px;">
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input type="email" ngModel name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" ngModel name="password"></ion-input>
+    </ion-item>
+
+
+    <div style="margin-top: 40px;">
+      <div class="center">
+        <ion-button style="width: 14pc;" type="submit" color="primary">Iniciar sesión</ion-button>
+      </div>
+      <p style="margin-top: 40px;" text-center>No tienes una cuenta?<br><small>has click en el boton de abajo</small>
+      </p>
+    </div>
+  </form>
+  <ion-fab side="end" horizontal="end" edge>
+    <ion-fab-button routerLink="/register">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
