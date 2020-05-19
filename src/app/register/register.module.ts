@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
-
+import { Camera } from "@ionic-native/camera/ngx";
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +15,11 @@ import { RegisterPage } from './register.page';
     IonicModule,
     RegisterPageRoutingModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage],
+    providers: [
+
+    Camera
+
+  ]
 })
 export class RegisterPageModule {}
