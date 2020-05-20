@@ -24,7 +24,7 @@
     </ion-col>
   </ion-row>
   <ion-fab side="end" horizontal="end" edge>
-    <ion-fab-button routerLink="/register" style="position: relative;top: 35pc;">
+    <ion-fab-button routerLink="/report/new" style="position: relative;top: 35pc;">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -39,7 +39,7 @@
           {{item.title}}
         </ion-col>
         <ion-col class="center">
-          <ion-avatar style="height: 31px;width: 38px;" (click)="show()">
+          <ion-avatar style="height: 31px;width: 38px;" [routerLink]="[ '/report', item.title ]">
             <img src="../../assets/eye-outline.svg">
           </ion-avatar>
         </ion-col>
