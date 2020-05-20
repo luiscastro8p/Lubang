@@ -1,39 +1,26 @@
 import { delay, map } from "rxjs/operators";
 import { Injectable } from "@angular/core";
-import {
-  HttpClient
-} from "@angular/common/http";
+
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class AuthService {
   private url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty";
   private apikey = "AIzaSyAS195NxI6fi6GWqLR2OfZeR0rQ2jcE-So";
+  public items: any = [];
+  constructor() {}
 
-  constructor(private http: HttpClient) {}
-
-  
   nuevoUsuario(value) {
-    console.log(value);
-    
-    return this.http
-      .post(`${this.url}/login `, value)
-      .pipe(
-        map(resp => {
-          return resp;
-        })
-      );
+   
   }
   login(value) {
-console.log(value);
+    console.log(value);
 
-    return this.http
-      .post(`${this.url}/login`, value)
-      .pipe(
-        map(resp => {
-            console.log(resp)
-          return resp;
-        })
-      );
+  
+  }
+  filterItems(searchTerm) {
+    return this.items.filter((item) => {
+      return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    });
   }
 }

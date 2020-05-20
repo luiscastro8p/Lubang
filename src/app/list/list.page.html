@@ -3,25 +3,53 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      List
-    </ion-title>
+    Lista de problemas
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="suelta para recargar la lista"
+      refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
+  <ion-row style="height: 45px;">
+    <ion-col class="text-center">
+      <p>¿Que es?</p>
+    </ion-col>
+    <ion-col class="text-center">
+      <p>Fecha</p>
+    </ion-col>
+    <ion-col class="text-center">
+      <p>Acciones</p>
+    </ion-col>
+  </ion-row>
+  <ion-fab side="end" horizontal="end" edge>
+    <ion-fab-button routerLink="/register" style="position: relative;top: 35pc;">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div style="width: 100%;
+    height: 73%;">
+    <ion-list style="height: 100%;">
+      <ion-item *ngFor="let item of items">
+        <ion-col class="text-center">
+          <p>hola</p>
+        </ion-col>
+        <ion-col class="text-center">
+          {{item.title}}
+        </ion-col>
+        <ion-col class="center">
+          <ion-avatar style="height: 31px;width: 38px;" (click)="show()">
+            <img src="../../assets/eye-outline.svg">
+          </ion-avatar>
+        </ion-col>
+      </ion-item>
+    </ion-list>
+  </div>
   <!--
     <div *ngIf="selectedItem" padding>
       You navigated here from <b>{{selectedItem.title }}</b>
     </div>
   -->
+
 </ion-content>

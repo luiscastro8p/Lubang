@@ -1,13 +1,20 @@
-<ion-card>
-  <ion-card-header>
-    <ion-title routerLink="/login" style="width: 170px;">
-      <ion-icon name="arrow-round-back"></ion-icon>Registro
-    </ion-title>
-  </ion-card-header>
+<ion-header style="height:43px;">
+  <ion-title routerLink="/login" style="width: 100%;margin: 3px;padding: 8px;">
+    <ion-icon name="arrow-round-back"></ion-icon>Registro de usuario
+  </ion-title>
+</ion-header>
+<ion-content>
   <ion-card-content>
     <div class="center">
-      <img src="../../assets/icon/profile.png" class="slide-image">
-
+      <img src="../../assets/icon/profile.png" class="slide-image" *ngIf="!filestring">
+      <img [src]="filestring" class="slide-image" *ngIf="filestring">
+    </div>
+    <div style="margin: 10px;" class="center">
+      <input type="file" name="file" id="file" class="fileInput" (change)="changeListener($event)"
+        style="display: none;" />
+      <label for="file" class="input-mod2 ">
+        <ion-icon name="images"></ion-icon> Selecciona una foto de perfil
+      </label>
     </div>
     <form #form="ngForm" (ngSubmit)="register(form)" method="post">
       <ion-item>
@@ -21,6 +28,11 @@
       </ion-item>
 
       <ion-item>
+        <ion-label position="floating">Telefono</ion-label>
+        <ion-input type="number" ngModel name="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="floating">Dirección</ion-label>
         <ion-input ngModel name="address"></ion-input>
       </ion-item>
@@ -29,10 +41,10 @@
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input type="password" ngModel name="password"></ion-input>
       </ion-item>
-      <div style="display: flex;justify-content: center;align-content: center;margin-top: 52px;">
-        <ion-button type="submit" expand="full" color="danger">Registrarse</ion-button>
+      <div *ngIf="form.valid" style="display: flex;justify-content: center;align-content: center;margin-top: 52px;">
+        <ion-button type="submit" expand="full" color="tertiary">Registrarse</ion-button>
       </div>
 
     </form>
   </ion-card-content>
-</ion-card>
+</ion-content>

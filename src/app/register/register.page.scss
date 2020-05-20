@@ -1,9 +1,22 @@
-.sc-ion-card-ios-s img {
-    width: 50%;
+.center img {
+  width: 140px !important;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-mod2 {
+  padding: 5px 10px;
+  background: #20a8d8;
+  color: #fff;
+  border: 0px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.icon-inner {
+  margin: 2px;
 }
