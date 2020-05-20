@@ -23,6 +23,7 @@
   </ion-refresher>
   <ion-row style="height: 45px;">
     <ion-col class="text-center">
+
       <p>¿Que es?</p>
     </ion-col>
     <ion-col class="text-center">
@@ -37,15 +38,27 @@
     <ion-list style="height: 100%;">
       <ion-item *ngFor="let item of items">
         <ion-col class="text-center">
-          <p>hola</p>
+          <p>Una problema</p>
         </ion-col>
         <ion-col class="text-center">
           {{item.title}}
         </ion-col>
         <ion-col class="center">
-          <ion-avatar style="height: 31px;width: 38px;" [routerLink]="[ '/report', item.title ]">
-            <img src="../../assets/eye-outline.svg">
-          </ion-avatar>
+          <diV *ngIf="item.icon === 0" style="color: green;" class="icon text-center">
+            <ion-avatar [routerLink]="[ '/report', item.title ]">
+              <ion-icon name="eye"></ion-icon>
+            </ion-avatar>
+          </diV>
+          <diV *ngIf="item.icon === 1" style="color: orange;" class="icon text-center">
+            <ion-avatar [routerLink]="[ '/report', item.title ]">
+              <ion-icon name="eye"></ion-icon>
+            </ion-avatar>
+          </diV>
+          <diV *ngIf="item.icon === 2" style="color: red;">
+            <ion-avatar [routerLink]="[ '/report', item.title ]" class="icon text-center">
+              <ion-icon name="eye"></ion-icon>
+            </ion-avatar>
+          </diV>
         </ion-col>
       </ion-item>
     </ion-list>

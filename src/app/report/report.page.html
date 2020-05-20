@@ -1,9 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Report</ion-title>
+    <ion-row routerLink="/list">
+      <ion-col size="1" class="center" style="font-size:20px;">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-title style="padding:0px">Reporte</ion-title>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+
+<ion-content>
+  <div class="center">
+    <img src="../../assets/photo.gif" class="slide-image" (click)="takePhoto()" *ngIf="!imageURL" width="100%">
+    <img [src]="imageURL" class="slide-image" (click)="takePhoto()" *ngIf="imageURL">
+  </div>
+  <form #form="ngForm" (ngSubmit)="register(form)" method="post">
+    <ion-item>
+      <ion-label position="floating">¿Qué es?</ion-label>
+      <ion-input ngModel name="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea type="email" ngModel name="text"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telefono</ion-label>
+      <ion-input type="number" ngModel name="phone"></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col class="center">
+        <small>Grado de incidencia</small>
+      </ion-col>
+      <ion-col>
+        <p>hola</p>
+      </ion-col>
+
+    </ion-row>
+    <div style="display: flex;justify-content: center;align-content: center;margin-top: 52px;">
+      <ion-button type="submit" expand="full" color="tertiary">Registrarse</ion-button>
+    </div>
+
+  </form>
 </ion-content>
