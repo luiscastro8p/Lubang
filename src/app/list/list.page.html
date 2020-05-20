@@ -3,7 +3,16 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    Lista de problemas
+    <ion-row>
+      <ion-col class="center">
+        Lista de problemas
+      </ion-col>
+      <ion-col class="center">
+        <ion-button type="button" color="warning" routerLink="/report/new" style="font-size: 10px;">
+          Nuevo reporte<ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
@@ -23,13 +32,8 @@
       <p>Acciones</p>
     </ion-col>
   </ion-row>
-  <ion-fab side="end" horizontal="end" edge>
-    <ion-fab-button routerLink="/report/new" style="position: relative;top: 35pc;">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <div style="width: 100%;
-    height: 73%;">
+
+  <div>
     <ion-list style="height: 100%;">
       <ion-item *ngFor="let item of items">
         <ion-col class="text-center">
