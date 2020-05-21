@@ -1,14 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ubicacion:
-    </ion-title>
+    <ion-row>
+      <ion-col size="1" class="center" style="font-size:20px;" routerLink="/list">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-col>
+      <ion-col routerLink="/list">
+        <ion-title style="padding:0px">Regresar al reporte </ion-title>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="map">
-    
+
   </div>
 </ion-content>
-<ion-button type="button" id="submit" expand="block" fill="outline" size="large">Guardar</ion-button>

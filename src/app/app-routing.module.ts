@@ -18,7 +18,7 @@ const routes: Routes = [
       import("./list/list.module").then((m) => m.ListPageModule),
   },
   {
-    path: "map",
+    path: "map/:lat/:lng",
     loadChildren: () => import("./map/map.module").then((m) => m.MapModule),
   },
   {

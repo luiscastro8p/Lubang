@@ -1,11 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-row routerLink="/list">
-      <ion-col size="1" class="center" style="font-size:20px;">
+    <ion-row class="center">
+
+
+      <ion-col size="1" class="center" style="font-size:20px;" routerLink="/list">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-col>
-      <ion-col>
+      <ion-col routerLink="/list">
         <ion-title style="padding:0px">Reporte</ion-title>
+      </ion-col>
+
+      <ion-col class="center">
+        <ion-button type="button" color="warning" (click)="register(form.value,opcion)" style="font-size: 10px;">
+          Guardar Reporte
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -18,7 +26,7 @@
     <img src="../../assets/photo.gif" class="slide-image" (click)="takePhoto()" *ngIf="!imageURL" width="100%">
     <img [src]="imageURL" class="slide-image" (click)="takePhoto()" *ngIf="imageURL">
   </div>
-  <form #form="ngForm" (ngSubmit)="register(form)" method="post">
+  <form #form="ngForm" method="post">
     <ion-item>
       <ion-label position="floating">¿Qué es?</ion-label>
       <ion-input ngModel name="name"></ion-input>
@@ -34,17 +42,47 @@
       <ion-input type="number" ngModel name="phone"></ion-input>
     </ion-item>
     <ion-row>
-      <ion-col class="center">
-        <small>Grado de incidencia</small>
-      </ion-col>
-      <ion-col>
-        <p>hola</p>
-      </ion-col>
 
+      <ion-col>
+        <ion-list>
+          <ion-radio-group (ionChange)="radioGroupChange($event)">
+            <ion-list-header>
+              <small>Grado de incidencia</small>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>En buen estado</ion-label>
+              <ion-radio slot="start" value="1" color="success"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Tomar precacución</ion-label>
+              <ion-radio slot="start" value="2" color="warning"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Mal estado</ion-label>
+              <ion-radio slot="start" value="3" color="danger"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+
+      </ion-col>
     </ion-row>
-    <div style="display: flex;justify-content: center;align-content: center;margin-top: 52px;">
-      <ion-button type="submit" expand="full" color="tertiary">Registrarse</ion-button>
+
+    <div class="text-center">
+
+      <p style="margin: 0px;">Tu ubicacion es:</p>
+      <p style="font-size: 10px;">
+        lat:{{lat}}
+        lng:{{lng}}
+      </p>
     </div>
 
+
+
   </form>
+  <div style="display: flex;justify-content: center;align-content: center; margin: 10px;">
+    <ion-button type="button" expand="full" color="tertiary" [routerLink]="[ '/map/',lat,lng]">Ver ubicación
+    </ion-button>
+  </div>
 </ion-content>

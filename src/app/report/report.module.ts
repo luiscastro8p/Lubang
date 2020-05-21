@@ -8,6 +8,7 @@ import { ReportPageRoutingModule } from './report-routing.module';
 
 import { ReportPage } from './report.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
