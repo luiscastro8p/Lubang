@@ -10,8 +10,8 @@
         <ion-title style="padding:0px">Reporte</ion-title>
       </ion-col>
 
-      <ion-col class="center">
-        <ion-button type="button" color="warning" (click)="register(form.value,opcion)" style="font-size: 10px;">
+      <ion-col class="center" *ngIf="id === 'new'">
+        <ion-button type="button" color="warning" (click)="register(data,opcion)" style="font-size: 10px;">
           Guardar Reporte
         </ion-button>
       </ion-col>
@@ -22,27 +22,37 @@
 
 
 <ion-content>
-  <div class="center">
+  <div class="center" *ngIf="!image">
     <img src="../../assets/photo.gif" class="slide-image" (click)="takePhoto()" *ngIf="!imageURL" width="100%">
     <img [src]="imageURL" class="slide-image" (click)="takePhoto()" *ngIf="imageURL">
   </div>
-  <form #form="ngForm" method="post">
-    <ion-item>
+  <div class="center" *ngIf="image">
+    <img [src]="image" class="slide-image" (click)="takePhoto()">
+  </div>
+  <form>
+
+    <ion-item *ngIf="id === 'new'">
+      <ion-select [(ngModel)]="data.reportTypeId" name="reportTypeId" style="padding: 0px;">
+        <ion-select-option value="">Selecciona un tipo..</ion-select-option>
+        <ion-select-option *ngFor="let item of type" value={{item.id}}>{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="id !== 'new'">
       <ion-label position="floating">¿Qué es?</ion-label>
-      <ion-input ngModel name="name"></ion-input>
+      <p>{{data.reportTypeId}}</p>
     </ion-item>
 
-    <ion-item>
+
+    <ion-item *ngIf="id === 'new'">
       <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea type="email" ngModel name="text"></ion-textarea>
+      <ion-textarea type="text" [(ngModel)]="data.description" name="text"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="id !== 'new'">
+      <ion-label position="floating" style="margin:5px;">Descripción</ion-label>
+      <p style="padding: 5px;">{{data.description}}</p>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Telefono</ion-label>
-      <ion-input type="number" ngModel name="phone"></ion-input>
-    </ion-item>
-    <ion-row>
-
+    <ion-row *ngIf="id === 'new'">
       <ion-col>
         <ion-list>
           <ion-radio-group (ionChange)="radioGroupChange($event)">
@@ -68,10 +78,41 @@
 
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="id !== 'new'">
+      <ion-col>
+        <ion-list>
+          <ion-radio-group>
+            <ion-list-header>
+              <small>Grado de incidencia</small>
+            </ion-list-header>
+            <div *ngIf="opcion == 1">
+              <ion-item>
+                <ion-label>En buen estado</ion-label>
+                <ion-radio slot="start" color="success" checked></ion-radio>
+              </ion-item>
+            </div>
+            <div *ngIf="opcion == 2">
+              <ion-item>
+                <ion-label>Tomar precacución</ion-label>
+                <ion-radio slot="start" color="warning" checked></ion-radio>
+              </ion-item>
+
+            </div>
+            <div *ngIf="opcion == 3">
+              <ion-item>
+                <ion-label>Mal estado</ion-label>
+                <ion-radio slot="start" color="danger" checked></ion-radio>
+              </ion-item>
+            </div>
+          </ion-radio-group>
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
 
     <div class="text-center">
 
-      <p style="margin: 0px;">Tu ubicacion es:</p>
+      <p style="margin: 0px;">Ubicacion:</p>
       <p style="font-size: 10px;">
         lat:{{lat}}
         lng:{{lng}}
@@ -81,7 +122,7 @@
 
 
   </form>
-  <div style="display: flex;justify-content: center;align-content: center; margin: 10px;">
+  <div style="display: flex;justify-content: center;align-content: center; margin: 10px;" *ngIf="id !== 'new'">
     <ion-button type="button" color="tertiary" [routerLink]="[ '/map/',lat,lng]">Ver ubicación
     </ion-button>
   </div>

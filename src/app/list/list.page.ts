@@ -20,66 +20,17 @@ export class ListPage implements OnInit {
     "build",
   ];
   temp = [];
-  public items = [
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "bache",
-      status: "RESOLVED",
-      priority: this.getRandomInt(4, 1),
-      description: "Es un bache bien cabron que lleva varios dias asi",
-      lat: 25.7753341,
-      lng: -109.0192314,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "Señal de stop rayada",
-      status: "RESOLVED",
-      description: "unos cholos lo hicieron hace tiempo",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "la calle esta del asco",
-      status: "ATTENDED",
-      description: "arreglen esto que ya tienen mucho ",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "la calle esta del asco",
-      status: "ATTENDED",
-      description: "arreglen esto que ya tienen mucho ",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "la calle esta del asco",
-      status: "ATTENDED",
-      description: "arreglen esto que ya tienen mucho ",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "Boulevart mal pavimentado ",
-      status: "CREATED",
-      description:
-        "Hace dias realizaron unas actividades a las palmas y los mismos trabajadores dejaron huecos en el boulevart",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-  ];
+  public items:any = [];
   constructor(public DataService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.DataService.GetReport().subscribe((resp: any) => {
+      this.items = resp;
+    console.log(resp);
+    
+      
+    })
+  }
   show() {
     console.log("hola");
   }
@@ -87,7 +38,10 @@ export class ListPage implements OnInit {
     console.log("Begin async operation");
 
     setTimeout(() => {
-      console.log("Async operation has ended");
+     this.DataService.GetReport().subscribe((resp: any) => {
+       this.items = resp;
+       console.log(resp);
+     });
       event.target.complete();
     }, 2000);
   }

@@ -4,6 +4,9 @@ import { Router } from "@angular/router";
 
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { AuthService } from '../../Services/auth.service';
+import Swal from "sweetalert2";
+
 @Component({
   selector: "app-register",
   templateUrl: "./register.page.html",
@@ -13,23 +16,42 @@ export class RegisterPage implements OnInit {
   imageURL;
   files;
   filestring = '';
-  constructor(private router: Router, public camera: Camera) {}
+  data = {}
+  constructor(private router: Router, public camera: Camera,public DataService:AuthService) {}
   public actionSheetController: ActionSheetController;
   ngOnInit() {
     this.filestring = ''
   }
-  register(form: NgForm) {
+  register(form) {
+
 
     
     let obj: any = {
-      name: form.value.nombre,
+      fullName: form.value.fullName,
       email: form.value.email,
       password: form.value.password,
-      surname: form.value.apellido,
+      phone: form.value.phone,
+      address: form.value.address,
+      birthdate: form.value.birthdate,
+      photo:this.filestring
     };
-    // this.authService.nuevoUsuario(obj).subscribe((resp) => {
-    //   this.router.navigateByUrl("/home");
-    // });
+    console.log(obj);
+     Swal.fire({
+       text: "Guardando información",
+       allowOutsideClick: false,
+       width: "270px",
+     });
+     Swal.showLoading();
+    this.DataService.User(obj).subscribe(resp => {
+        Swal.fire({
+          text: "Se creó correctamente ",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+          width: "250px",
+        });
+      this.router.navigateByUrl("/list")
+    })
   }
 
   takePhoto() {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-// import { AuthService } from '../../Services/auth.service';
+ import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from "@ionic/angular";
 
@@ -12,7 +12,7 @@ import { AlertController } from "@ionic/angular";
 export class LoginPage implements OnInit {
   titulo: string;
   constructor(
-    // public authServce: AuthService,
+     public authServce: AuthService,
     private router: Router,
     public alertCtrl: AlertController
   ) {}
@@ -24,16 +24,15 @@ export class LoginPage implements OnInit {
       password: form.value.password,
       email: form.value.email,
     };
-    console.log(obj);
     
-    // this.authServce.login(obj).subscribe(
-    //   (resp) => {
-    //     this.router.navigateByUrl("/home");
-    //   },
-    //   (err) => {
-    //     this.presentInput(err);
-    //   }
-    // );
+    this.authServce.login(obj).subscribe(resp => {
+     localStorage.setItem("USER", JSON.stringify(resp));
+      this.router.navigateByUrl('/list')
+      console.log(resp);
+    }, err => {
+        console.log(err);
+        
+    })
   }
   async presentInput(datos) {
     const input = await this.alertCtrl.create({

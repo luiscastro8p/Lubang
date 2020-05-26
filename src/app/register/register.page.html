@@ -19,7 +19,7 @@
     <form #form="ngForm" (ngSubmit)="register(form)" method="post">
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input ngModel name="name"></ion-input>
+        <ion-input ngModel name="fullName"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -40,6 +40,10 @@
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input type="password" ngModel name="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Fecha de nacimiento</ion-label>
+        <ion-datetime value="2019-10-01T15:43:40.394Z" ngModel name="birthdate" display-timezone="utc"></ion-datetime>
       </ion-item>
       <div style="display: flex;justify-content: center;align-content: center;margin-top: 52px;">
         <ion-button type="submit" color="tertiary">Registrarse</ion-button>

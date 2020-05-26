@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NavController, LoadingController } from "@ionic/angular";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from '../../Services/auth.service';
+
 
 declare var google;
 
@@ -11,66 +13,66 @@ declare var google;
   styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit {
-  
   mapRef = null;
-  lat: number;
-  lng: number;
-  report = [
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "bache",
-      status: "RESOLVED",
-      priority: this.getRandomInt(4, 1),
-      description: "Es un bache bien cabron que lleva varios dias asi",
-      lat: 25.7753341,
-      lng: -109.0192314,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "Señal de stop rayada",
-      status: "RESOLVED",
-      description: "unos cholos lo hicieron hace tiempo",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "la calle esta del asco",
-      status: "ATTENDED",
-      description: "arreglen esto que ya tienen mucho ",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-    {
-      id: this.getRandomInt(10123123, 1),
-      name: "la calle esta del asco",
-      status: "ATTENDED",
-      description: "arreglen esto que ya tienen mucho ",
-      priority: this.getRandomInt(4, 1),
-      lat: 25.7582117,
-      lng: -108.9833722,
-    },
-  ];
+  lat: number = 25.7751266;
+  lng: number = -109.0192168;
+  id;
+  report: any = [];
   constructor(
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
     private geolocation: Geolocation,
     private route: ActivatedRoute,
-    private router:Router
+    private router: Router,
+    public DataService: AuthService
   ) {}
 
   ngOnInit() {
-    const lat = this.route.snapshot.paramMap.get("lat");
-    const lng = this.route.snapshot.paramMap.get("lng");
-    this.lat = Number(lat);
-    this.lng = Number(lng);
-    console.log(lat);
-    console.log(lng);
-    if (!lat && !lng) {
-      this.lat = 25.7582117;
-      this.lng = -108.9833722;
+  
+  }
+  ionViewWillEnter() {
+      const lat = this.route.snapshot.paramMap.get("lat");
+      const lng = this.route.snapshot.paramMap.get("lng");
+    this.validators(lat, lng);
+    //calling an API
+  }
+
+  async validators(lat, lng) {
+    if (lat && lng) {
+      let url = "/map/" + lat + "/" + lng;
+      this.navCtrl.navigateForward(url);
+      console.log("tienes lat");
+
+      this.lat = Number(lat);
+      this.lng = Number(lng);
+      this.router.navigateByUrl(url);
+      this.report = [
+        {
+          lat: this.lat,
+          lng: this.lng,
+          name: "Ubicación",
+          description: "",
+        },
+      ];
+    }
+    if (lat === null && lng === null) {
+      console.log("no tienes lat");
+
+      await this.DataService.GetReport().subscribe((resp: any) => {
+        this.lat = 25.7751266;
+        this.lng = -109.0192168;
+        for (let item of resp) {
+          let obj = {
+            id: item.id,
+            lat: Number(item.lat),
+            lng: Number(item.lng),
+            priority: item.priority,
+            name: item.reportType.name,
+            description: item.description,
+          };
+          this.report.push(obj);
+        }
+      });
     }
     this.loadMap();
   }
@@ -93,24 +95,37 @@ export class MapComponent implements OnInit {
     //cierre creacion de mapa
     google.maps.event.addListenerOnce(this.mapRef, "idle", () => {
       // loading.dismiss();
+
       for (let item of this.report) {
-        this.addMarker(item.lat, item.lng, item.name, item.description,item.id);
+        this.addMarker(
+          item.lat,
+          item.lng,
+          item.name,
+          item.description,
+          item.id
+        );
       }
       // this.addMarker(myLatLng.lat, myLatLng.lng);
     });
   }
-  abrirPeligros() { 
+  abrirPeligros() {
     this.navCtrl.navigateForward(["/mapa-final"]);
+  }
+  doRefresh(event) {
+    console.log("Begin async operation");
+
+    setTimeout(() => {
+      console.log("Async operation has ended");
+      event.target.complete();
+    }, 2000);
   }
   private addMarker(
     lat: number,
     lng: number,
     name: string,
     description: string,
-    id:number
+    id: number
   ) {
-    console.log(name);
-
     var infowindow = new google.maps.InfoWindow({
       content: "",
     });
@@ -125,16 +140,12 @@ export class MapComponent implements OnInit {
 
     marker.addListener("click", function (event) {
       infowindow.setContent("<p><b>" + name + "</b></p>" + "<p>" + description);
-
       infowindow.open(this.mapRef, marker);
     });
     marker.addListener("dblclick", function (event) {
-      console.log(id);
       // this.router.navigateByUrl("/register/" + id);
       window.location.replace("/report/" + id);
-   
-      
-     });
+    });
   }
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -142,14 +153,10 @@ export class MapComponent implements OnInit {
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
     return {
-      // lat: rta.coords.latitude,
-      // lng: rta.coords.longitude,
-      lat: this.lat,
-      lng: this.lng,
+      lat: rta.coords.latitude,
+      lng: rta.coords.longitude,
     };
   }
-
-
 }
   
  

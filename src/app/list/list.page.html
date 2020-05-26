@@ -39,24 +39,24 @@
     <ion-list style="height: 100%;">
       <ion-item *ngFor="let item of items">
         <ion-col class="text-left">
-          <b> {{item.name}}</b>
+          <b> {{item.reportType.name}}</b>
         </ion-col>
         <ion-col class="text-justify">
           {{item.description}}
         </ion-col>
         <ion-col class="center">
           <diV *ngIf="item.priority === 1" style="color: green;" class="icon text-center">
-            <ion-avatar [routerLink]="[ '/report', item.title ]">
+            <ion-avatar [routerLink]="[ '/report/', item.id ]">
               <ion-icon name="eye"></ion-icon>
             </ion-avatar>
           </diV>
           <diV *ngIf="item.priority === 2" style="color: orange;" class="icon text-center">
-            <ion-avatar [routerLink]="[ '/report', item.title ]">
+            <ion-avatar [routerLink]="[ '/report', item.id ]">
               <ion-icon name="eye"></ion-icon>
             </ion-avatar>
           </diV>
           <diV *ngIf="item.priority === 3" style="color: red;">
-            <ion-avatar [routerLink]="[ '/report', item.title ]" class="icon text-center">
+            <ion-avatar [routerLink]="[ '/report', item.id ]" class="icon text-center">
               <ion-icon name="eye"></ion-icon>
             </ion-avatar>
           </diV>

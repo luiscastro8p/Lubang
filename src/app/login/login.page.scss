@@ -1,20 +1,14 @@
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .text-center {
-    text-align: center;
-}
-
-.background {
-    // background-image: url('../../assets/fondo2.jpg');
-    // background-size: cover;
-
+  text-align: center;
 }
 
 img {
-    width: 134px;
-    border-radius: 88px;
+  width: 134px;
+  border-radius: 88px;
 }
