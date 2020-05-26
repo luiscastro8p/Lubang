@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-row>
-      <ion-col class="center">
+      <ion-col class="center" [routerLink]="[ '/map']">
         Lista de problemas
       </ion-col>
       <ion-col class="center">
@@ -21,45 +21,47 @@
     <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="suelta para recargar la lista"
       refreshingSpinner="circles"></ion-refresher-content>
   </ion-refresher>
+
   <ion-row style="height: 45px;">
     <ion-col class="text-center">
-
       <p>¿Que es?</p>
     </ion-col>
     <ion-col class="text-center">
-      <p>Fecha</p>
+      <p>Descripción</p>
     </ion-col>
     <ion-col class="text-center">
       <p>Acciones</p>
     </ion-col>
+
   </ion-row>
 
   <div>
     <ion-list style="height: 100%;">
       <ion-item *ngFor="let item of items">
-        <ion-col class="text-center">
-          <p>Una problema</p>
+        <ion-col class="text-left">
+          <b> {{item.name}}</b>
         </ion-col>
-        <ion-col class="text-center">
-          {{item.title}}
+        <ion-col class="text-justify">
+          {{item.description}}
         </ion-col>
         <ion-col class="center">
-          <diV *ngIf="item.icon === 0" style="color: green;" class="icon text-center">
+          <diV *ngIf="item.priority === 1" style="color: green;" class="icon text-center">
             <ion-avatar [routerLink]="[ '/report', item.title ]">
               <ion-icon name="eye"></ion-icon>
             </ion-avatar>
           </diV>
-          <diV *ngIf="item.icon === 1" style="color: orange;" class="icon text-center">
+          <diV *ngIf="item.priority === 2" style="color: orange;" class="icon text-center">
             <ion-avatar [routerLink]="[ '/report', item.title ]">
               <ion-icon name="eye"></ion-icon>
             </ion-avatar>
           </diV>
-          <diV *ngIf="item.icon === 2" style="color: red;">
+          <diV *ngIf="item.priority === 3" style="color: red;">
             <ion-avatar [routerLink]="[ '/report', item.title ]" class="icon text-center">
               <ion-icon name="eye"></ion-icon>
             </ion-avatar>
           </diV>
         </ion-col>
+
       </ion-item>
     </ion-list>
   </div>

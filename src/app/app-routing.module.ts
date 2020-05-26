@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "home",
+    redirectTo: "login",
     pathMatch: "full",
   },
   {
@@ -18,6 +18,10 @@ const routes: Routes = [
       import("./list/list.module").then((m) => m.ListPageModule),
   },
   {
+    path: "map",
+    loadChildren: () => import("./map/map.module").then((m) => m.MapModule),
+  },
+  {
     path: "map/:lat/:lng",
     loadChildren: () => import("./map/map.module").then((m) => m.MapModule),
   },
@@ -27,14 +31,15 @@ const routes: Routes = [
       import("./login/login.module").then((m) => m.LoginPageModule),
   },
   {
-    path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    path: "register",
+    loadChildren: () =>
+      import("./register/register.module").then((m) => m.RegisterPageModule),
   },
   {
-    path: 'report/:id',
-    loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+    path: "report/:id",
+    loadChildren: () =>
+      import("./report/report.module").then((m) => m.ReportPageModule),
   },
-
 ];
 
 @NgModule({

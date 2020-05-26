@@ -68,8 +68,5 @@ export class ReportPage implements OnInit {
     this.lng = rta.coords.longitude;
     console.log(this.lat);
     console.log(this.lng);
-    
-    
-   
   }
 }

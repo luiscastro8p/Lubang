@@ -20,19 +20,66 @@ export class ListPage implements OnInit {
     "build",
   ];
   temp = [];
-  public items: Array<{ title: string; note: string; icon: any }> = [];
-  constructor(public DataService: AuthService) {
-    for (let i = 1; i < 55; i++) {
-      this.items.push({
-        title: "10/20/1 " + i,
-        note: "This is item #" + i,
-        icon: Math.floor(Math.random() * 3),
-      });
-    }
-  }
+  public items = [
+    {
+      id: this.getRandomInt(10123123, 1),
+      name: "bache",
+      status: "RESOLVED",
+      priority: this.getRandomInt(4, 1),
+      description: "Es un bache bien cabron que lleva varios dias asi",
+      lat: 25.7753341,
+      lng: -109.0192314,
+    },
+    {
+      id: this.getRandomInt(10123123, 1),
+      name: "Señal de stop rayada",
+      status: "RESOLVED",
+      description: "unos cholos lo hicieron hace tiempo",
+      priority: this.getRandomInt(4, 1),
+      lat: 25.7582117,
+      lng: -108.9833722,
+    },
+    {
+      id: this.getRandomInt(10123123, 1),
+      name: "la calle esta del asco",
+      status: "ATTENDED",
+      description: "arreglen esto que ya tienen mucho ",
+      priority: this.getRandomInt(4, 1),
+      lat: 25.7582117,
+      lng: -108.9833722,
+    },
+    {
+      id: this.getRandomInt(10123123, 1),
+      name: "la calle esta del asco",
+      status: "ATTENDED",
+      description: "arreglen esto que ya tienen mucho ",
+      priority: this.getRandomInt(4, 1),
+      lat: 25.7582117,
+      lng: -108.9833722,
+    },
+    {
+      id: this.getRandomInt(10123123, 1),
+      name: "la calle esta del asco",
+      status: "ATTENDED",
+      description: "arreglen esto que ya tienen mucho ",
+      priority: this.getRandomInt(4, 1),
+      lat: 25.7582117,
+      lng: -108.9833722,
+    },
+    {
+      id: this.getRandomInt(10123123, 1),
+      name: "Boulevart mal pavimentado ",
+      status: "CREATED",
+      description:
+        "Hace dias realizaron unas actividades a las palmas y los mismos trabajadores dejaron huecos en el boulevart",
+      priority: this.getRandomInt(4, 1),
+      lat: 25.7582117,
+      lng: -108.9833722,
+    },
+  ];
+  constructor(public DataService: AuthService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   show() {
     console.log("hola");
   }
@@ -48,5 +95,7 @@ export class ListPage implements OnInit {
   // navigate(item) {
   //   this.router.navigate(['/list', JSON.stringify(item)]);
   // }
-
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 }
